@@ -1,3 +1,19 @@
+/**
+ * Copyright 2016 https://github.com/Ajk4
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+**/
+
 package validation
 
 import org.scalatest.{Matchers, FlatSpec}
@@ -18,7 +34,7 @@ class ValidationWithWarningsTest extends FlatSpec with Matchers {
     val validation = checkAge(p)
 
     validation.isSuccess shouldBe true
-    validation.warnings shouldEqual Seq("Illegal in some contries")
+    validation.warnings shouldEqual Seq("Illegal in some countries")
   }
 
   it should "not return no warnings if age = 22" in {
@@ -42,7 +58,7 @@ class ValidationWithWarningsTest extends FlatSpec with Matchers {
     result.warnings.size shouldEqual 2
   }
 
-  it should "join warnings from successes with |@|, even if error occured" in {
+  it should "join warnings from successes with |@|, even if error occurred" in {
     val v1 = checkAge(Person(17))
     val v2 = checkAge(Person(22))
     val v3 = checkAge(Person(20))
@@ -91,7 +107,7 @@ class ValidationWithWarningsTest extends FlatSpec with Matchers {
   else if (p.age > 40)
     "Too Old!".failure.noWarnings
   else if (p.age < 21)
-    p.success.withWarning("Illegal in some contries")
+    p.success.withWarning("Illegal in some countries")
   else
     p.success.noWarnings
 
